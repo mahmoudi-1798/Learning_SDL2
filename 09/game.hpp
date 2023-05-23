@@ -12,8 +12,8 @@
 
 using namespace std;
 
-#define WIDTH 1000
-#define HEIGHT 750
+#define WIDTH 1280
+#define HEIGHT 720
 #define TILE_SIZE 16
 
 class Game {
@@ -28,6 +28,7 @@ class Game {
         void draw(const char* msg, int x, int y, int r, int g, int b);
         void loadMap(const char* fileName);
         void drawMap();
+        void scroll();
     private:
         SDL_Renderer* ren;
         SDL_Window* win;
@@ -38,6 +39,8 @@ class Game {
         int mousex, mousey;
         Entity player;
         vector<Object> map;
+        int mapX, mapY;
+        int speed;
 };
 
 

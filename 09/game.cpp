@@ -9,6 +9,8 @@ Game::Game() {
     count=0;
     font = TTF_OpenFont("res/sans.ttf", 24);
     loadMap("res/1.level");
+    mapX=mapY=0;
+    speed=1;
     loop();
 }
 
@@ -97,6 +99,7 @@ void Game::input() {
 
 void Game::update() {
     //player.updateAnimation();
+    scroll();
 }
 
 void Game::loadMap(const char* fileName){
@@ -134,6 +137,17 @@ void Game::loadMap(const char* fileName){
 
 void Game::drawMap(){
     for(int i=0; i<map.size(); i++){
-        draw(map[i]);
+        if(map[i].getDX() >= mapX-TILE_SIZE
+        & map[i].getDY() >= mapY-TILE_SIZE
+        & map[i].getDX() <= mapX+WIDTH+TILE_SIZE
+        & map[i].getDY() <= mapY+HEIGHT+TILE_SIZE){
+            draw(map[i]);
+        }
+    }
+}
+
+void Game::scroll(){
+    for(int i=0; i<map.size(); i++){
+        map[i].setDest(map[i].getDX()+speed, map[i].getDY()+speed);
     }
 }
